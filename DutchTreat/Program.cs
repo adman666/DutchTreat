@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace DutchTreat
 {
@@ -10,11 +11,21 @@ namespace DutchTreat
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args)
+        private static IWebHost BuildWebHost(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(SetupConfiguration)
                 .UseStartup<Startup>()
                 .Build();
+        }
+
+        private static void SetupConfiguration(WebHostBuilderContext context, IConfigurationBuilder builder)
+        {
+            builder.Sources.Clear();
+
+            builder
+                .AddJsonFile("config.json", false, true)
+                .AddEnvironmentVariables();
         }
     }
 }
