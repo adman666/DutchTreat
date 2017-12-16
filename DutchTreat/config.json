@@ -1,5 +1,11 @@
 ﻿{
     "ConnectionStrings": {
-        "DutchConnectionString":  "server=.;Database=DuthTreatDb;Integrated Security=true;MultipleActiveResultSets=true;" 
-    } 
+        "DutchConnectionString": "server=.;Database=DuthTreatDb;Integrated Security=true;MultipleActiveResultSets=true;"
+    },
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft":  "Warning" 
+        }
+    }
 }

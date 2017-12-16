@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using DutchTreat.Data;
 using DutchTreat.Services;
 using DutchTreat.ViewModels;
@@ -8,13 +9,13 @@ namespace DutchTreat.Controllers
 {
     public class AppController : Controller
     {
-        private readonly DutchContext _context;
+        private readonly IDutchRepository _repository;
         private readonly IMailService _mailService;
 
-        public AppController(IMailService mailService, DutchContext context)
+        public AppController(IMailService mailService, IDutchRepository repository)
         {
             _mailService = mailService;
-            _context = context;
+            _repository = repository;
         }
 
         public IActionResult Index()
@@ -48,10 +49,9 @@ namespace DutchTreat.Controllers
             return View();
         }
 
-        public IActionResult Shop()
+        public async Task<IActionResult> Shop()
         {
-            var results = _context.Products.OrderBy(x => x.Category).ToList();
-            return View(results);
+            return View(await _repository.GetAll());
         }
     }
 }

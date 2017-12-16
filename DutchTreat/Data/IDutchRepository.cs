@@ -8,5 +8,6 @@ namespace DutchTreat.Data
     {
         Task<IEnumerable<Product>> GetAll();
         Task<IEnumerable<Product>> GetAllByCategory(string category);
+        Task<bool> SaveAll();
     }
 }
