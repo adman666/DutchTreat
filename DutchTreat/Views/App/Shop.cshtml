@@ -1,0 +1,7 @@
+﻿@model IEnumerable<Product>
+<h1>Shop</h1>
+<p>@Model.Count()</p>
+@foreach (var item in Model)
+{
+    <li>@item.Title</li>
+}
