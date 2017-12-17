@@ -61,5 +61,10 @@ namespace DutchTreat.Data
                 .ThenInclude(x => x.Product)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
+
+        public async Task AddEntity(object model)
+        {
+            await _context.AddAsync(model);
+        }
     }
 }

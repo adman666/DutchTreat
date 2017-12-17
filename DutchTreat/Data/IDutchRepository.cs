@@ -11,5 +11,6 @@ namespace DutchTreat.Data
         Task<bool> SaveAll();
         Task<IEnumerable<Order>> GetAllOrders();
         Task<Order> GetOrderById(int id);
+        Task AddEntity(object model);
     }
 }
