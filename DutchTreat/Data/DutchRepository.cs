@@ -32,7 +32,6 @@ namespace DutchTreat.Data
                 _logger.LogError($"Falied to get all products: {ex}");
                 return null;
             }
-           
         }
 
         public async Task<IEnumerable<Product>> GetAllByCategory(string category)
@@ -45,6 +44,22 @@ namespace DutchTreat.Data
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<IEnumerable<Order>> GetAllOrders()
+        {
+            return await _context.Orders
+                .Include(x => x.Items)
+                .ThenInclude(x => x.Product)
+                .ToListAsync();
+        }
+
+        public async Task<Order> GetOrderById(int id)
+        {
+            return await _context.Orders
+                .Include(x => x.Items)
+                .ThenInclude(x => x.Product)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }
