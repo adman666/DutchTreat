@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DutchTreat.Data;
@@ -31,9 +32,31 @@ namespace DutchTreat.Controllers
             {
                 var order = await _dutchRepository.GetOrderById(orderId);
 
-                if (order.Items != null)
+                if (order != null)
                 {
                     return Ok(_mapper.Map<IEnumerable<OrderItem>, IEnumerable<OrderItemViewMdoel>>(order.Items));
+                }
+
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError($"Failed to get order for id {orderId}: {exception}");
+            }
+
+            return NotFound();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int orderId, int id)
+        {
+            try
+            {
+                var order = await _dutchRepository.GetOrderById(orderId);
+
+                var item = order?.Items.FirstOrDefault(x => x.Id == id);
+                if (item != null)
+                {
+                    return Ok(_mapper.Map<OrderItem, OrderItemViewMdoel>(item));
                 }
             }
             catch (Exception exception)
@@ -41,7 +64,7 @@ namespace DutchTreat.Controllers
                 _logger.LogError($"Failed to get order for id {orderId}: {exception}");
             }
 
-            return BadRequest($"Failed to get order for id {orderId}");
+            return NotFound();
         }
     }
 }
