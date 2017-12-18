@@ -25,12 +25,12 @@ namespace DutchTreat.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllOrders()
+        public async Task<IActionResult> GetAllOrders(bool includeItems = true)
         {
             try
             {
                 return Ok(_mapper.Map<IEnumerable<Order>, IEnumerable<OrderViewModel>>(
-                    await _dutchRepository.GetAllOrders()));
+                    await _dutchRepository.GetAllOrders(includeItems)));
             }
             catch (Exception exception)
             {

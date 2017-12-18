@@ -46,11 +46,15 @@ namespace DutchTreat.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<IEnumerable<Order>> GetAllOrders()
+        public async Task<IEnumerable<Order>> GetAllOrders(bool includeItems)
         {
+            if (includeItems)
+                return await _context.Orders
+                    .Include(x => x.Items)
+                    .ThenInclude(x => x.Product)
+                    .ToListAsync();
+
             return await _context.Orders
-                .Include(x => x.Items)
-                .ThenInclude(x => x.Product)
                 .ToListAsync();
         }
 

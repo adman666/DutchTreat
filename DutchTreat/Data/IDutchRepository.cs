@@ -9,7 +9,7 @@ namespace DutchTreat.Data
         Task<IEnumerable<Product>> GetAll();
         Task<IEnumerable<Product>> GetAllByCategory(string category);
         Task<bool> SaveAll();
-        Task<IEnumerable<Order>> GetAllOrders();
+        Task<IEnumerable<Order>> GetAllOrders(bool includeItems);
         Task<Order> GetOrderById(int id);
         Task AddEntity(object model);
     }
