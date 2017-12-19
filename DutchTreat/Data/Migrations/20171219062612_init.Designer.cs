@@ -11,8 +11,8 @@ using System;
 namespace DutchTreat.Migrations
 {
     [DbContext(typeof(DutchContext))]
-    [Migration("20171218113607_indetity")]
-    partial class indetity
+    [Migration("20171219062612_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
