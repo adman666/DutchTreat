@@ -24,9 +24,7 @@ namespace DutchTreat.Controllers
         public IActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
-            {
                 return RedirectToAction("Index", "App");
-            }
 
             return View();
         }
@@ -38,14 +36,14 @@ namespace DutchTreat.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, false);
+                    var result =
+                        await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe,
+                            false);
 
                     if (result.Succeeded)
                     {
                         if (Request.Query.Keys.Contains("ReturnUrl"))
-                        {
                             Redirect(Request.Query["ReturnUrl"].First());
-                        }
 
                         return RedirectToAction("Shop", "App");
                     }
@@ -59,6 +57,13 @@ namespace DutchTreat.Controllers
             }
 
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "App");
         }
     }
 }
