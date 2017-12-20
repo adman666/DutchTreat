@@ -1,4 +1,4 @@
-﻿export class StoreCustomer {
+﻿class StoreCustomer {
 
     constructor(private firstName: string, private lastName: string) {
     }
@@ -7,7 +7,7 @@
     private ourName: string;
 
     public showName() {
-        alert(this.firstName + this.lastName);
+        alert(`${this.firstName} ${this.lastName}`);
     }
 
     set name(val) {

@@ -1,4 +1,8 @@
 ﻿@model IEnumerable<Product>
+@section scripts {
+    <script src="~/ts/storecustomer.js"></script>
+    <script src="~/ts/main.js"></script>
+}
 <h1>Shop</h1>
 <p>@Model.Count()</p>
 @foreach (var item in Model)
