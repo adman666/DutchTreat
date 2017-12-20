@@ -58,17 +58,30 @@ namespace DutchTreat.Data
                 .ToListAsync();
         }
 
-        public async Task<Order> GetOrderById(int id)
+        public async Task<Order> GetOrderById(string username, int id)
         {
             return await _context.Orders
                 .Include(x => x.Items)
                 .ThenInclude(x => x.Product)
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id && x.User.UserName == username);
         }
 
         public async Task AddEntity(object model)
         {
             await _context.AddAsync(model);
+        }
+
+        public async Task<IEnumerable<Order>> GetAllOrdersByUser(string username, bool includeItems)
+        {
+            if (includeItems)
+                return await _context.Orders
+                    .Where(x => x.User.UserName == username)
+                    .Include(x => x.Items)
+                    .ThenInclude(x => x.Product)
+                    .ToListAsync();
+
+            return await _context.Orders
+                .ToListAsync();
         }
     }
 }

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,6 +10,11 @@
     <Content Remove="Pages\App\**" />
     <EmbeddedResource Remove="Pages\App\**" />
     <None Remove="Pages\App\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\ts\main.ts" />
+    <Content Remove="wwwroot\ts\storecustomer.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +30,11 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\ts\main.ts" />
+    <TypeScriptCompile Include="wwwroot\ts\storecustomer.ts" />
   </ItemGroup>
 
 </Project>

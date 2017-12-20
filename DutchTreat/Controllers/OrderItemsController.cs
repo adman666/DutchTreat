@@ -6,11 +6,14 @@ using AutoMapper;
 using DutchTreat.Data;
 using DutchTreat.Data.Entities;
 using DutchTreat.ViewModels;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace DutchTreat.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/orders/{orderid}/items")]
     public class OrderItemsController : Controller
     {
@@ -30,7 +33,7 @@ namespace DutchTreat.Controllers
         {
             try
             {
-                var order = await _dutchRepository.GetOrderById(orderId);
+                var order = await _dutchRepository.GetOrderById(User.Identity.Name, orderId);
 
                 if (order != null)
                 {
@@ -51,7 +54,7 @@ namespace DutchTreat.Controllers
         {
             try
             {
-                var order = await _dutchRepository.GetOrderById(orderId);
+                var order = await _dutchRepository.GetOrderById(User.Identity.Name, orderId);
 
                 var item = order?.Items.FirstOrDefault(x => x.Id == id);
                 if (item != null)

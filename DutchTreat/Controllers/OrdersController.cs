@@ -5,23 +5,29 @@ using AutoMapper;
 using DutchTreat.Data;
 using DutchTreat.Data.Entities;
 using DutchTreat.ViewModels;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace DutchTreat.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[Controller]")]
     public class OrdersController : Controller
     {
         private readonly IDutchRepository _dutchRepository;
         private readonly ILogger<OrdersController> _logger;
         private readonly IMapper _mapper;
+        private readonly UserManager<StoreUser> _userManager;
 
-        public OrdersController(IDutchRepository dutchRepository, ILogger<OrdersController> logger, IMapper mapper)
+        public OrdersController(IDutchRepository dutchRepository, ILogger<OrdersController> logger, IMapper mapper, UserManager<StoreUser> userManager)
         {
             _dutchRepository = dutchRepository;
             _logger = logger;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -29,8 +35,9 @@ namespace DutchTreat.Controllers
         {
             try
             {
+                var username = User.Identity.Name;
                 return Ok(_mapper.Map<IEnumerable<Order>, IEnumerable<OrderViewModel>>(
-                    await _dutchRepository.GetAllOrders(includeItems)));
+                    await _dutchRepository.GetAllOrdersByUser(username, includeItems)));
             }
             catch (Exception exception)
             {
@@ -44,7 +51,7 @@ namespace DutchTreat.Controllers
         {
             try
             {
-                var order = await _dutchRepository.GetOrderById(id);
+                var order = await _dutchRepository.GetOrderById(User.Identity.Name, id);
 
                 if (order != null)
                     return Ok(_mapper.Map<Order, OrderViewModel>(order));
@@ -63,21 +70,23 @@ namespace DutchTreat.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                var newOrder = _mapper.Map<OrderViewModel, Order>(model);
+
+                if (newOrder.OrderDate == DateTime.MinValue)
                 {
-                    var newOrder = _mapper.Map<OrderViewModel, Order>(model);
-
-                    if (newOrder.OrderDate == DateTime.MinValue)
-                        newOrder.OrderDate = DateTime.Now;
-
-                    await _dutchRepository.AddEntity(newOrder);
-                    if (!await _dutchRepository.SaveAll())
-                        return BadRequest(ModelState);
-
-                    return Created($"/api/orders/{newOrder.Id}", _mapper.Map<Order, OrderViewModel>(newOrder));
+                    newOrder.OrderDate = DateTime.Now;
                 }
 
-                return BadRequest(ModelState);
+                newOrder.User = await _userManager.FindByNameAsync(User.Identity.Name);
+
+                await _dutchRepository.AddEntity(newOrder);
+                if (!await _dutchRepository.SaveAll())
+                    return BadRequest(ModelState);
+
+                return Created($"/api/orders/{newOrder.Id}", _mapper.Map<Order, OrderViewModel>(newOrder));
             }
             catch (Exception exception)
             {
