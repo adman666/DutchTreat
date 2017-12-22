@@ -52,7 +52,7 @@ namespace DutchTreat.Controllers
         [Authorize]
         public async Task<IActionResult> Shop()
         {
-            return View(await _repository.GetAll());
+            return View();
         }
     }
 }
