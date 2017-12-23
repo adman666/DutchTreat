@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "../../../../../ClientApp/$$_lazy_route_resource l
 /***/ "../../../../../ClientApp/app/app-component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n    <div class=\"col-md-9\">\r\n        <h3>{{ title }}</h3>\r\n        <product-list></product-list>\r\n    </div>\r\n    <div class=\"col-md-3\">\r\n        <div class=\"well well-sm\">\r\n            <h3>Cart</h3>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<router-outlet></router-outlet>"
 
 /***/ }),
 
@@ -67,10 +67,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// @Angular components
 var platform_browser_1 = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var http_1 = __webpack_require__("../../../http/esm5/http.js");
+var router_1 = __webpack_require__("../../../router/esm5/router.js");
+var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
+// Application components
 var app_component_1 = __webpack_require__("../../../../../ClientApp/app/app.component.ts");
 var productList_component_1 = __webpack_require__("../../../../../ClientApp/app/shop/productList.component.ts");
+var cart_component_1 = __webpack_require__("../../../../../ClientApp/app/shop/cart.component.ts");
+var shop_component_1 = __webpack_require__("../../../../../ClientApp/app/shop/shop.component.ts");
+var checkout_component_1 = __webpack_require__("../../../../../ClientApp/app/checkout/checkout.component.ts");
+var login_component_1 = __webpack_require__("../../../../../ClientApp/app/login/login.component.ts");
+var dataService_1 = __webpack_require__("../../../../../ClientApp/app/shared/dataService.ts");
+// Routes
+var routes = [
+    { path: '', component: shop_component_1.Shop },
+    { path: 'checkout', component: checkout_component_1.Checkout },
+    { path: 'login', component: login_component_1.Login }
+];
 var AppModule = (function () {
     function AppModule() {
     }
@@ -78,12 +94,24 @@ var AppModule = (function () {
         core_1.NgModule({
             declarations: [
                 app_component_1.AppComponent,
-                productList_component_1.ProductList
+                productList_component_1.ProductList,
+                cart_component_1.Cart,
+                shop_component_1.Shop,
+                checkout_component_1.Checkout,
+                login_component_1.Login
             ],
             imports: [
-                platform_browser_1.BrowserModule
+                platform_browser_1.BrowserModule,
+                http_1.HttpModule,
+                forms_1.FormsModule,
+                router_1.RouterModule.forRoot(routes, {
+                    useHash: true,
+                    enableTracing: false
+                })
             ],
-            providers: [],
+            providers: [
+                dataService_1.DataService
+            ],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);
@@ -94,10 +122,339 @@ exports.AppModule = AppModule;
 
 /***/ }),
 
+/***/ "../../../../../ClientApp/app/checkout/checkout.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".checkout-thumb {\n  max-width: 100px;\n}\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/app/checkout/checkout.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n    <div class=\"alert alert-warning\" *ngIf=\"errorMessage\">{{ errorMessage }}</div>\n    <h3>Confirm Order</h3>\n    <table class=\"table table-bordered table-hover\">\n        <tr *ngFor=\"let o of data.order.items\">\n            <td><img src=\"/img/{{ o.productArtId }}.jpg\" alt=\"o.productTitle\" class=\"img-thumbnail checkout-thumb\"/></td>\n            <td>{{ o.productCategory }}({{ o.productSize }}) - {{ o.productArtist }}: {{ o.productTitle }}</td>\n            <td>{{ o.quantity }}</td>\n            <td>{{ o.unitPrice|currency:'USD':true }}</td>\n            <td>{{ (o.unitPrice * o.quantity)|currency:'AUD' }}</td>\n        </tr>\n    </table>\n    <div class=\"col-md-4 col-md-offset-8 text-right\">\n        <table class=\"table table-condensed\">\n            <tr>\n                <td class=\"text-right\">Subtotal</td>\n                <td class=\"text-right\">{{ data.order.subtotal|currency:'AUD' }}</td>\n            </tr>\n            <tr>\n                <td class=\"text-right\">Shipping</td>\n                <td class=\"text-right\">$ 0.00</td>\n            </tr>\n            <tr>\n                <td class=\"text-right\">Total:</td>\n                <td class=\"text-right\">{{ data.order.subtotal|currency:'AUD' }}</td>\n            </tr>\n        </table>\n        <button class=\"btn btn-success\" (click)=\"onCheckout()\">Complete Purchase</button>\n        <a routerLink=\"/\" class=\"btn btn-info\">Cancel</a>\n    </div>\n\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/app/checkout/checkout.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var router_1 = __webpack_require__("../../../router/esm5/router.js");
+var dataService_1 = __webpack_require__("../../../../../ClientApp/app/shared/dataService.ts");
+var Checkout = (function () {
+    function Checkout(data, router) {
+        this.data = data;
+        this.router = router;
+        this.errorMessage = '';
+    }
+    Checkout.prototype.onCheckout = function () {
+        var _this = this;
+        this.data.checkout()
+            .subscribe(function (success) {
+            if (success) {
+                _this.router.navigate(['']);
+            }
+        }, function (err) { return _this.errorMessage = 'Failed to save order'; });
+    };
+    Checkout = __decorate([
+        core_1.Component({
+            selector: 'checkout',
+            template: __webpack_require__("../../../../../ClientApp/app/checkout/checkout.component.html"),
+            styles: [__webpack_require__("../../../../../ClientApp/app/checkout/checkout.component.css")]
+        }),
+        __metadata("design:paramtypes", [dataService_1.DataService, router_1.Router])
+    ], Checkout);
+    return Checkout;
+}());
+exports.Checkout = Checkout;
+
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/app/login/login.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\r\n    <div class=\"col-md-4 col-md-offset-4\">\r\n        <div *ngIf=\"errorMessage\" class=\"alert alert-warning\">{{ errorMessage }}</div>\r\n        <form (submit)=\"onLogin()\" #theForm=\"ngForm\" novalidate>\r\n            <div class=\"form-group\">\r\n                <label for=\"username\">Username</label>\r\n                <input type=\"text\" class=\"form-control\" name=\"username\" id=\"username\" [(ngModel)]=\"credentials.username\" #username=\"ngModel\" required/>\r\n                <div class=\"text-danger\" *ngIf=\"username.touched && username.invalid && username.errors.required\">Username is required!</div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"password\">Password</label>\r\n                <input type=\"password\" class=\"form-control\" name=\"password\" id=\"password\" [(ngModel)]=\"credentials.password\" #password=\"ngModel\" required/>\r\n                <div class=\"text-danger\" *ngIf=\"password.touched && password.invalid && password.errors.required\">Passsword is required!</div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <input type=\"submit\" class=\"btn btn-success\" value=\"Login\" [disabled]=\"theForm.invalid\"/>\r\n                <a routerLink=\"/\" class=\"btn btn-default\">Cancel</a>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/app/login/login.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var router_1 = __webpack_require__("../../../router/esm5/router.js");
+var dataService_1 = __webpack_require__("../../../../../ClientApp/app/shared/dataService.ts");
+var Login = (function () {
+    function Login(data, router) {
+        this.data = data;
+        this.router = router;
+        this.errorMessage = '';
+        this.credentials = {
+            username: '',
+            password: ''
+        };
+    }
+    Login.prototype.onLogin = function () {
+        var _this = this;
+        this.data.login(this.credentials)
+            .subscribe(function (success) {
+            if (success) {
+                if (_this.data.order.items.length === 0) {
+                    _this.router.navigate(['']);
+                }
+                else {
+                    _this.router.navigate(['checkout']);
+                }
+            }
+        }, function (err) { return _this.errorMessage = 'Failed to login'; });
+    };
+    Login = __decorate([
+        core_1.Component({
+            selector: 'login',
+            template: __webpack_require__("../../../../../ClientApp/app/login/login.component.html")
+        }),
+        __metadata("design:paramtypes", [dataService_1.DataService, router_1.Router])
+    ], Login);
+    return Login;
+}());
+exports.Login = Login;
+
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/app/shared/dataService.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var http_1 = __webpack_require__("../../../http/esm5/http.js");
+var order_1 = __webpack_require__("../../../../../ClientApp/app/shared/order.ts");
+__webpack_require__("../../../../rxjs/_esm5/add/operator/map.js");
+var DataService = (function () {
+    function DataService(http) {
+        this.http = http;
+        this.token = '';
+        this.order = new order_1.Order();
+        this.products = [];
+    }
+    DataService.prototype.loadProducts = function () {
+        var _this = this;
+        return this.http.get('/api/products')
+            .map(function (result) { return _this.products = result.json(); });
+    };
+    DataService.prototype.login = function (credentials) {
+        var _this = this;
+        return this.http.post('/account/createtoken', credentials)
+            .map(function (response) {
+            var tokenInfo = response.json();
+            _this.token = tokenInfo.token;
+            _this.tokenExpiration = tokenInfo.expiration;
+            return true;
+        });
+    };
+    DataService.prototype.checkout = function () {
+        var _this = this;
+        return this.http.post('/api/orders', this.order, {
+            headers: new http_1.Headers({
+                'Authorization': "Bearer " + this.token
+            })
+        })
+            .map(function (response) {
+            _this.order = new order_1.Order();
+            return true;
+        });
+    };
+    DataService.prototype.addToOrder = function (product) {
+        var item = this.order.items.find(function (x) { return x.productId === product.id; });
+        if (item) {
+            item.quantity++;
+        }
+        else {
+            item = new order_1.OrderItem();
+            item.productId = product.id;
+            item.productArtist = product.artist;
+            item.productCategory = product.category;
+            item.productArtId = product.artId;
+            item.productTitle = product.title;
+            item.productSize = product.size;
+            item.unitPrice = product.price;
+            item.quantity = 1;
+            this.order.items.push(item);
+        }
+    };
+    Object.defineProperty(DataService.prototype, "loginRequired", {
+        get: function () {
+            return this.token.length === 0 || this.tokenExpiration > new Date();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    DataService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.Http])
+    ], DataService);
+    return DataService;
+}());
+exports.DataService = DataService;
+
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/app/shared/order.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var _ = __webpack_require__("../../../../lodash/lodash.js");
+var Order = (function () {
+    function Order() {
+        this.orderDate = new Date();
+        this.items = new Array();
+    }
+    Object.defineProperty(Order.prototype, "subtotal", {
+        get: function () {
+            return _.sum(_.map(this.items, function (i) { return i.unitPrice * i.quantity; }));
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ;
+    return Order;
+}());
+exports.Order = Order;
+var OrderItem = (function () {
+    function OrderItem() {
+    }
+    return OrderItem;
+}());
+exports.OrderItem = OrderItem;
+
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/app/shop/cart.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h3>Shopping Cart</h3>\r\n<div>#/Items: {{ data.order.items.length }}</div>\r\n<div>Subtotal: {{ data.order.subtotal | currency }}</div>\r\n<table class=\"table table-condensed table-hover\">\r\n    <thead>\r\n    <tr>\r\n        <td>Product</td>\r\n        <td>#</td>\r\n        <td>$</td>\r\n        <td>Total</td>\r\n    </tr>\r\n    </thead>\r\n    <tbody>\r\n    <tr *ngFor=\"let o of data.order.items\">\r\n        <td>{{ o.productCategory }} - {{ o.productTitle }}</td>\r\n        <td>{{ o.quantity }}</td>\r\n        <td>{{ o.unitPrice | currency }}</td>\r\n        <td>{{ (o.unitPrice * o.quantity) | currency }}</td>\r\n    </tr>\r\n    </tbody>\r\n</table>\r\n<button routerLink=\"checkout\" class=\"btn btn-success\" *ngIf=\"data.order.items.length > 0\" (click)=\"onCheckout()\">Checkout</button>"
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/app/shop/cart.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var dataService_1 = __webpack_require__("../../../../../ClientApp/app/shared/dataService.ts");
+var router_1 = __webpack_require__("../../../router/esm5/router.js");
+var Cart = (function () {
+    function Cart(data, router) {
+        this.data = data;
+        this.router = router;
+    }
+    Cart.prototype.onCheckout = function () {
+        if (this.data.loginRequired) {
+            this.router.navigate(['login']);
+        }
+        else {
+            this.router.navigate(['checkout']);
+        }
+    };
+    Cart = __decorate([
+        core_1.Component({
+            selector: 'the-cart',
+            template: __webpack_require__("../../../../../ClientApp/app/shop/cart.component.html"),
+            styleUrls: []
+        }),
+        __metadata("design:paramtypes", [dataService_1.DataService, router_1.Router])
+    ], Cart);
+    return Cart;
+}());
+exports.Cart = Cart;
+
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/app/shop/productList.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".product-info img {\r\n    max-width: 100px;\r\n    float: left;\r\n    margin: 0 2px;\r\n    border: solid 1px #000000;\r\n}\r\n\r\n.product-info .product-name {\r\n    font-size: large;\r\n    font-weight: bold;\r\n}\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
 /***/ "../../../../../ClientApp/app/shop/productList.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n    <ul>\r\n        <li *ngFor=\"let p of products\">{{ p.title }}: {{ p.price | currency:'AUD':true }}</li>\r\n    </ul>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n    <div class=\"product-info col-md-4 well well-sm\" *ngFor=\"let p of products\">\r\n        <img src=\"/img/{{ p.artId }}.jpg\" [alt]=\"p.title\" class=\"img-responsive\" />\r\n        <div class=\"product-name\">{{ p.category }} - {{ p.size }}</div>\r\n        <div><strong>Price:</strong> {{ p.price | currency:'AUD':'symbol' }}</div>\r\n        <div><strong>Artist:</strong> {{ p.artist }}</div>\r\n        <div><strong>Title:</strong> {{ p.title }}</div>\r\n        <div><strong>Description:</strong> {{ p.artDescription }}</div>\r\n        <button id=\"buyButton\" class=\"btn btn-success btn-sm pull-right\" (click)=\"addProduct(p)\">Buy</button>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -112,35 +469,77 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var dataService_1 = __webpack_require__("../../../../../ClientApp/app/shared/dataService.ts");
 var ProductList = (function () {
-    function ProductList() {
-        this.products = [
-            {
-                title: 'First product',
-                price: 19.99
-            },
-            {
-                title: 'Second product',
-                price: 9.99
-            },
-            {
-                title: 'Third product',
-                price: 14.99
-            }
-        ];
+    function ProductList(data) {
+        this.data = data;
+        this.products = [];
+        this.products = data.products;
     }
+    ProductList.prototype.ngOnInit = function () {
+        var _this = this;
+        this.data.loadProducts()
+            .subscribe(function (success) {
+            if (success) {
+                _this.products = _this.data.products;
+            }
+        });
+    };
+    ProductList.prototype.addProduct = function (product) {
+        this.data.addToOrder(product);
+    };
     ProductList = __decorate([
         core_1.Component({
             selector: 'product-list',
             template: __webpack_require__("../../../../../ClientApp/app/shop/productList.component.html"),
-            styleUrls: []
-        })
+            styles: [__webpack_require__("../../../../../ClientApp/app/shop/productList.component.css")]
+        }),
+        __metadata("design:paramtypes", [dataService_1.DataService])
     ], ProductList);
     return ProductList;
 }());
 exports.ProductList = ProductList;
+
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/app/shop/shop.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\r\n    <div class=\"col-md-9\">\r\n        <h3>{{ title }}</h3>\r\n        <product-list></product-list>\r\n    </div>\r\n    <div class=\"col-md-3\">\r\n        <div class=\"well well-sm\">\r\n            <the-cart></the-cart>\r\n        </div>\r\n    </div>\r\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../ClientApp/app/shop/shop.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var Shop = (function () {
+    function Shop() {
+    }
+    Shop = __decorate([
+        core_1.Component({
+            selector: 'the-shop',
+            template: __webpack_require__("../../../../../ClientApp/app/shop/shop.component.html")
+        })
+    ], Shop);
+    return Shop;
+}());
+exports.Shop = Shop;
 
 
 /***/ }),
