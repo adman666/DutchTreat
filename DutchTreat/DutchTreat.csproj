@@ -70,4 +70,11 @@
     <TypeScriptSourceRoot />
   </PropertyGroup>
 
+  <Target Name="MyPublishScipts" BeforeTargets="BeforePublish">
+    <Exec Command="npm install"></Exec>
+    <Exec Command="bower install"></Exec>
+    <Exec Command="gulp"></Exec>
+    <Exec Command="ng build"></Exec>
+  </Target>
+
 </Project>

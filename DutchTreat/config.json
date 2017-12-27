@@ -2,6 +2,7 @@
     "ConnectionStrings": {
         "DutchConnectionString": "server=.;Database=DuthTreatDb;Integrated Security=true;MultipleActiveResultSets=true;"
     },
+    "DisableSSL": false,
     "Logging": {
         "LogLevel": {
             "Default": "Information",

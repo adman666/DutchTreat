@@ -25,24 +25,24 @@ module.exports = "<router-outlet></router-outlet>"
 /***/ }),
 
 /***/ "../../../../../ClientApp/app/app.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("../../../core/esm5/core.js");
+
 var AppComponent = (function () {
     function AppComponent() {
         this.title = 'Product List';
     }
     AppComponent = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'the-shop',
             template: __webpack_require__("../../../../../ClientApp/app/app-component.html"),
             styles: []
@@ -50,74 +50,85 @@ var AppComponent = (function () {
     ], AppComponent);
     return AppComponent;
 }());
-exports.AppComponent = AppComponent;
+
 
 
 /***/ }),
 
 /***/ "../../../../../ClientApp/app/app.module.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__("../../../http/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__("../../../../../ClientApp/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shop_productList_component__ = __webpack_require__("../../../../../ClientApp/app/shop/productList.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shop_cart_component__ = __webpack_require__("../../../../../ClientApp/app/shop/cart.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shop_shop_component__ = __webpack_require__("../../../../../ClientApp/app/shop/shop.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__checkout_checkout_component__ = __webpack_require__("../../../../../ClientApp/app/checkout/checkout.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__login_login_component__ = __webpack_require__("../../../../../ClientApp/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__shared_dataService__ = __webpack_require__("../../../../../ClientApp/app/shared/dataService.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 // @Angular components
-var platform_browser_1 = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
-var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var http_1 = __webpack_require__("../../../http/esm5/http.js");
-var router_1 = __webpack_require__("../../../router/esm5/router.js");
-var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
+
+
+
+
+
 // Application components
-var app_component_1 = __webpack_require__("../../../../../ClientApp/app/app.component.ts");
-var productList_component_1 = __webpack_require__("../../../../../ClientApp/app/shop/productList.component.ts");
-var cart_component_1 = __webpack_require__("../../../../../ClientApp/app/shop/cart.component.ts");
-var shop_component_1 = __webpack_require__("../../../../../ClientApp/app/shop/shop.component.ts");
-var checkout_component_1 = __webpack_require__("../../../../../ClientApp/app/checkout/checkout.component.ts");
-var login_component_1 = __webpack_require__("../../../../../ClientApp/app/login/login.component.ts");
-var dataService_1 = __webpack_require__("../../../../../ClientApp/app/shared/dataService.ts");
+
+
+
+
+
+
+
 // Routes
 var routes = [
-    { path: '', component: shop_component_1.Shop },
-    { path: 'checkout', component: checkout_component_1.Checkout },
-    { path: 'login', component: login_component_1.Login }
+    { path: '', component: __WEBPACK_IMPORTED_MODULE_8__shop_shop_component__["a" /* Shop */] },
+    { path: 'checkout', component: __WEBPACK_IMPORTED_MODULE_9__checkout_checkout_component__["a" /* Checkout */] },
+    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_10__login_login_component__["a" /* Login */] }
 ];
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        core_1.NgModule({
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */])({
             declarations: [
-                app_component_1.AppComponent,
-                productList_component_1.ProductList,
-                cart_component_1.Cart,
-                shop_component_1.Shop,
-                checkout_component_1.Checkout,
-                login_component_1.Login
+                __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_6__shop_productList_component__["a" /* ProductList */],
+                __WEBPACK_IMPORTED_MODULE_7__shop_cart_component__["a" /* Cart */],
+                __WEBPACK_IMPORTED_MODULE_8__shop_shop_component__["a" /* Shop */],
+                __WEBPACK_IMPORTED_MODULE_9__checkout_checkout_component__["a" /* Checkout */],
+                __WEBPACK_IMPORTED_MODULE_10__login_login_component__["a" /* Login */]
             ],
             imports: [
-                platform_browser_1.BrowserModule,
-                http_1.HttpModule,
-                forms_1.FormsModule,
-                router_1.RouterModule.forRoot(routes, {
+                __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* HttpModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* RouterModule */].forRoot(routes, {
                     useHash: true,
                     enableTracing: false
                 })
             ],
             providers: [
-                dataService_1.DataService
+                __WEBPACK_IMPORTED_MODULE_11__shared_dataService__["a" /* DataService */]
             ],
-            bootstrap: [app_component_1.AppComponent]
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
     return AppModule;
 }());
-exports.AppModule = AppModule;
+
 
 
 /***/ }),
@@ -148,10 +159,13 @@ module.exports = "<div class=\"row\">\n    <div class=\"alert alert-warning\" *n
 /***/ }),
 
 /***/ "../../../../../ClientApp/app/checkout/checkout.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Checkout; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_dataService__ = __webpack_require__("../../../../../ClientApp/app/shared/dataService.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -161,10 +175,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var router_1 = __webpack_require__("../../../router/esm5/router.js");
-var dataService_1 = __webpack_require__("../../../../../ClientApp/app/shared/dataService.ts");
+
+
+
 var Checkout = (function () {
     function Checkout(data, router) {
         this.data = data;
@@ -181,16 +194,16 @@ var Checkout = (function () {
         }, function (err) { return _this.errorMessage = 'Failed to save order'; });
     };
     Checkout = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'checkout',
             template: __webpack_require__("../../../../../ClientApp/app/checkout/checkout.component.html"),
             styles: [__webpack_require__("../../../../../ClientApp/app/checkout/checkout.component.css")]
         }),
-        __metadata("design:paramtypes", [dataService_1.DataService, router_1.Router])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__shared_dataService__["a" /* DataService */], __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]])
     ], Checkout);
     return Checkout;
 }());
-exports.Checkout = Checkout;
+
 
 
 /***/ }),
@@ -203,10 +216,13 @@ module.exports = "<div class=\"row\">\r\n    <div class=\"col-md-4 col-md-offset
 /***/ }),
 
 /***/ "../../../../../ClientApp/app/login/login.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Login; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_dataService__ = __webpack_require__("../../../../../ClientApp/app/shared/dataService.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -216,10 +232,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var router_1 = __webpack_require__("../../../router/esm5/router.js");
-var dataService_1 = __webpack_require__("../../../../../ClientApp/app/shared/dataService.ts");
+
+
+
 var Login = (function () {
     function Login(data, router) {
         this.data = data;
@@ -245,24 +260,28 @@ var Login = (function () {
         }, function (err) { return _this.errorMessage = 'Failed to login'; });
     };
     Login = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'login',
             template: __webpack_require__("../../../../../ClientApp/app/login/login.component.html")
         }),
-        __metadata("design:paramtypes", [dataService_1.DataService, router_1.Router])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__shared_dataService__["a" /* DataService */], __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]])
     ], Login);
     return Login;
 }());
-exports.Login = Login;
+
 
 
 /***/ }),
 
 /***/ "../../../../../ClientApp/app/shared/dataService.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__order__ = __webpack_require__("../../../../../ClientApp/app/shared/order.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/map.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -272,16 +291,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var http_1 = __webpack_require__("../../../http/esm5/http.js");
-var order_1 = __webpack_require__("../../../../../ClientApp/app/shared/order.ts");
-__webpack_require__("../../../../rxjs/_esm5/add/operator/map.js");
+
+
+
+
 var DataService = (function () {
     function DataService(http) {
         this.http = http;
         this.token = '';
-        this.order = new order_1.Order();
+        this.order = new __WEBPACK_IMPORTED_MODULE_2__order__["a" /* Order */]();
         this.products = [];
     }
     DataService.prototype.loadProducts = function () {
@@ -305,12 +323,12 @@ var DataService = (function () {
             this.order.orderNumber = this.order.orderDate.getFullYear().toString() + this.order.orderDate.getTime().toString();
         }
         return this.http.post('/api/orders', this.order, {
-            headers: new http_1.Headers({
+            headers: new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({
                 'Authorization': "Bearer " + this.token
             })
         })
             .map(function (response) {
-            _this.order = new order_1.Order();
+            _this.order = new __WEBPACK_IMPORTED_MODULE_2__order__["a" /* Order */]();
             return true;
         });
     };
@@ -320,7 +338,7 @@ var DataService = (function () {
             item.quantity++;
         }
         else {
-            item = new order_1.OrderItem();
+            item = new __WEBPACK_IMPORTED_MODULE_2__order__["b" /* OrderItem */]();
             item.productId = product.id;
             item.productArtist = product.artist;
             item.productCategory = product.category;
@@ -340,23 +358,25 @@ var DataService = (function () {
         configurable: true
     });
     DataService = __decorate([
-        core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.Http])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
     ], DataService);
     return DataService;
 }());
-exports.DataService = DataService;
+
 
 
 /***/ }),
 
 /***/ "../../../../../ClientApp/app/shared/order.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Order; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return OrderItem; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__("../../../../lodash/lodash.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var _ = __webpack_require__("../../../../lodash/lodash.js");
 var Order = (function () {
     function Order() {
         this.orderDate = new Date();
@@ -364,7 +384,7 @@ var Order = (function () {
     }
     Object.defineProperty(Order.prototype, "subtotal", {
         get: function () {
-            return _.sum(_.map(this.items, function (i) { return i.unitPrice * i.quantity; }));
+            return __WEBPACK_IMPORTED_MODULE_0_lodash__["sum"](__WEBPACK_IMPORTED_MODULE_0_lodash__["map"](this.items, function (i) { return i.unitPrice * i.quantity; }));
         },
         enumerable: true,
         configurable: true
@@ -372,13 +392,13 @@ var Order = (function () {
     ;
     return Order;
 }());
-exports.Order = Order;
+
 var OrderItem = (function () {
     function OrderItem() {
     }
     return OrderItem;
 }());
-exports.OrderItem = OrderItem;
+
 
 
 /***/ }),
@@ -391,10 +411,13 @@ module.exports = "<h3>Shopping Cart</h3>\r\n<div>#/Items: {{ data.order.items.le
 /***/ }),
 
 /***/ "../../../../../ClientApp/app/shop/cart.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Cart; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_dataService__ = __webpack_require__("../../../../../ClientApp/app/shared/dataService.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -404,10 +427,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var dataService_1 = __webpack_require__("../../../../../ClientApp/app/shared/dataService.ts");
-var router_1 = __webpack_require__("../../../router/esm5/router.js");
+
+
+
 var Cart = (function () {
     function Cart(data, router) {
         this.data = data;
@@ -422,16 +444,16 @@ var Cart = (function () {
         }
     };
     Cart = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'the-cart',
             template: __webpack_require__("../../../../../ClientApp/app/shop/cart.component.html"),
             styleUrls: []
         }),
-        __metadata("design:paramtypes", [dataService_1.DataService, router_1.Router])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_dataService__["a" /* DataService */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]])
     ], Cart);
     return Cart;
 }());
-exports.Cart = Cart;
+
 
 
 /***/ }),
@@ -462,10 +484,12 @@ module.exports = "<div class=\"row\">\r\n    <div class=\"product-info col-md-4 
 /***/ }),
 
 /***/ "../../../../../ClientApp/app/shop/productList.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProductList; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_dataService__ = __webpack_require__("../../../../../ClientApp/app/shared/dataService.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -475,9 +499,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var dataService_1 = __webpack_require__("../../../../../ClientApp/app/shared/dataService.ts");
+
+
 var ProductList = (function () {
     function ProductList(data) {
         this.data = data;
@@ -497,16 +520,16 @@ var ProductList = (function () {
         this.data.addToOrder(product);
     };
     ProductList = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'product-list',
             template: __webpack_require__("../../../../../ClientApp/app/shop/productList.component.html"),
             styles: [__webpack_require__("../../../../../ClientApp/app/shop/productList.component.css")]
         }),
-        __metadata("design:paramtypes", [dataService_1.DataService])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_dataService__["a" /* DataService */]])
     ], ProductList);
     return ProductList;
 }());
-exports.ProductList = ProductList;
+
 
 
 /***/ }),
@@ -519,45 +542,44 @@ module.exports = "<div class=\"row\">\r\n    <div class=\"col-md-9\">\r\n       
 /***/ }),
 
 /***/ "../../../../../ClientApp/app/shop/shop.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Shop; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("../../../core/esm5/core.js");
+
 var Shop = (function () {
     function Shop() {
     }
     Shop = __decorate([
-        core_1.Component({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'the-shop',
             template: __webpack_require__("../../../../../ClientApp/app/shop/shop.component.html")
         })
     ], Shop);
     return Shop;
 }());
-exports.Shop = Shop;
+
 
 
 /***/ }),
 
 /***/ "../../../../../ClientApp/environments/environment.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 // The file contents for the current environment will overwrite these during build.
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.environment = {
+var environment = {
     production: false
 };
 
@@ -565,19 +587,22 @@ exports.environment = {
 /***/ }),
 
 /***/ "../../../../../ClientApp/main.ts":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__("../../../platform-browser-dynamic/esm5/platform-browser-dynamic.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__("../../../../../ClientApp/app/app.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../ClientApp/environments/environment.ts");
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var platform_browser_dynamic_1 = __webpack_require__("../../../platform-browser-dynamic/esm5/platform-browser-dynamic.js");
-var app_module_1 = __webpack_require__("../../../../../ClientApp/app/app.module.ts");
-var environment_1 = __webpack_require__("../../../../../ClientApp/environments/environment.ts");
-if (environment_1.environment.production) {
-    core_1.enableProdMode();
+
+
+
+if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* enableProdMode */])();
 }
-platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(app_module_1.AppModule)
+Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
     .catch(function (err) { return console.log(err); });
 
 
