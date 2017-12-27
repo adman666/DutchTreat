@@ -82,7 +82,7 @@ namespace DutchTreat.Controllers
 
                 newOrder.User = await _userManager.FindByNameAsync(User.Identity.Name);
 
-                await _dutchRepository.AddEntity(newOrder);
+                await _dutchRepository.AddOrder(newOrder);
                 if (!await _dutchRepository.SaveAll())
                     return BadRequest(ModelState);
 

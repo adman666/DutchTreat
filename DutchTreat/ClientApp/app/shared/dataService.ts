@@ -34,6 +34,10 @@ export class DataService {
     }
 
     checkout() {
+        if (!this.order.orderNumber) {
+            this.order.orderNumber = this.order.orderDate.getFullYear().toString() + this.order.orderDate.getTime().toString();
+        }
+
         return this.http.post('/api/orders', this.order,
                 {
                     headers: new Headers({
@@ -63,6 +67,7 @@ export class DataService {
             item.productTitle = product.title;
             item.productSize = product.size;
             item.unitPrice = product.price;
+
             item.quantity = 1;
 
             this.order.items.push(item);

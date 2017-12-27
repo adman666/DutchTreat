@@ -83,5 +83,15 @@ namespace DutchTreat.Data
             return await _context.Orders
                 .ToListAsync();
         }
+
+        public async Task AddOrder(Order newOrder)
+        {
+            foreach (var item in newOrder.Items)
+            {
+                item.Product = _context.Products.Find(item.Product.Id);
+            }
+
+            await AddEntity(newOrder);
+        }
     }
 }

@@ -25,6 +25,31 @@ var DataService = /** @class */ (function () {
         return this.http.get('/api/products')
             .map(function (result) { return _this.products = result.json(); });
     };
+    DataService.prototype.login = function (credentials) {
+        var _this = this;
+        return this.http.post('/account/createtoken', credentials)
+            .map(function (response) {
+            var tokenInfo = response.json();
+            _this.token = tokenInfo.token;
+            _this.tokenExpiration = tokenInfo.expiration;
+            return true;
+        });
+    };
+    DataService.prototype.checkout = function () {
+        var _this = this;
+        if (!this.order.orderNumber) {
+            this.order.orderNumber = this.order.orderDate.getFullYear().toString() + this.order.orderDate.getTime().toString();
+        }
+        return this.http.post('/api/orders', this.order, {
+            headers: new http_1.Headers({
+                'Authorization': "Bearer " + this.token
+            })
+        })
+            .map(function (response) {
+            _this.order = new order_1.Order();
+            return true;
+        });
+    };
     DataService.prototype.addToOrder = function (product) {
         var item = this.order.items.find(function (x) { return x.productId === product.id; });
         if (item) {
@@ -45,7 +70,7 @@ var DataService = /** @class */ (function () {
     };
     Object.defineProperty(DataService.prototype, "loginRequired", {
         get: function () {
-            return this.token.length == 0 || this.tokenExpiration > new Date();
+            return this.token.length === 0 || this.tokenExpiration > new Date();
         },
         enumerable: true,
         configurable: true

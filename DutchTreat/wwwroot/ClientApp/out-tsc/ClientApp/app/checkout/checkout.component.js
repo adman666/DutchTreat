@@ -10,14 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
 var dataService_1 = require("../shared/dataService");
 var Checkout = /** @class */ (function () {
-    function Checkout(data) {
+    function Checkout(data, router) {
         this.data = data;
+        this.router = router;
+        this.errorMessage = '';
     }
     Checkout.prototype.onCheckout = function () {
-        // TODO
-        alert('Doing checkout');
+        var _this = this;
+        this.data.checkout()
+            .subscribe(function (success) {
+            if (success) {
+                _this.router.navigate(['']);
+            }
+        }, function (err) { return _this.errorMessage = 'Failed to save order'; });
     };
     Checkout = __decorate([
         core_1.Component({
@@ -25,7 +33,7 @@ var Checkout = /** @class */ (function () {
             templateUrl: 'checkout.component.html',
             styleUrls: ['checkout.component.css']
         }),
-        __metadata("design:paramtypes", [dataService_1.DataService])
+        __metadata("design:paramtypes", [dataService_1.DataService, router_1.Router])
     ], Checkout);
     return Checkout;
 }());

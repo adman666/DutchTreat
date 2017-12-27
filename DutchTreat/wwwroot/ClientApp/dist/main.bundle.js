@@ -301,6 +301,9 @@ var DataService = (function () {
     };
     DataService.prototype.checkout = function () {
         var _this = this;
+        if (!this.order.orderNumber) {
+            this.order.orderNumber = this.order.orderDate.getFullYear().toString() + this.order.orderDate.getTime().toString();
+        }
         return this.http.post('/api/orders', this.order, {
             headers: new http_1.Headers({
                 'Authorization': "Bearer " + this.token
